@@ -1,6 +1,7 @@
 # import gspread library and class Credentials from google.oauth2.service.account function in google.auth library
 import gspread
 from google.oauth2.service_account import Credentials
+from pprint import pprint
 
 # set scope lists the APIs that the program should access in order to run. scope is not changeable so to define SCOPE as constant variable
 SCOPE = [
@@ -70,11 +71,30 @@ def update_sales_worksheet(data):
     sales_worksheet.append_row(data)
     print("Sales worksheet updated successfully\n")
 
+# define calculate surplus data function
+def calculate_surplus_data(sales_row):
+    """
+    Compare sales with stock and calculate the surplus for each item type.
+    The surplus is defined as the sales figure substracted from the stock:
+    -Positive surplus indicates waste
+    -Negative surplus indicates extra made when stock was sold out
+
+    """
+    print("Calculating surplus data...\n")
+    stock=SHEET.worksheet('stock').get_all_values()
+    stock_row=stock[-1]
+    
 
 
+def main():
+    """
+    Run all program functions
+    """
+    data=get_sales_data()
+    sales_data=[int(num) for num in data]
+    update_sales_worksheet(sales_data)
+    calculate_surplus_data(sales_data)
 
-data=get_sales_data()
-sales_data=[int(num) for num in data]
-update_sales_worksheet(sales_data)
-
+print("Welcome to Love Sandwiches Data Automation")
+main()
 
