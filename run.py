@@ -1,7 +1,7 @@
 # import gspread library and class Credentials from google.oauth2.service.account function in google.auth library
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+
 
 # set scope lists the APIs that the program should access in order to run. scope is not changeable so to define SCOPE as constant variable
 SCOPE = [
@@ -32,7 +32,7 @@ def get_sales_data():
         print('Example: 10,20,30,40,50,60\n')
 
 
-        data_str=input('Enter your data here:')
+        data_str=input('Enter your data here:\n')
         sales_data= data_str.split(',')
         
 
